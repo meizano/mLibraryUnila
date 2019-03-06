@@ -25,13 +25,20 @@ if($_GET){
 
     $xpath = new DOMXPath($dom);
     // returns list
+    // Informasi jumlah hasil pencarian dan waktu
     $info = $xpath->query("//div[@class='info']");
+    // daftar pustaka yang ditemukan
     $nlist = $xpath->query("//div[@class='item']");
+    // Mendapatkan link halaman berikutnya
     $nextLink = $xpath->query("//a[@class='next_link']");
 
+    // Mendapatkan nilai informasi hasil pencarian
     $infohasil = $info->item(0)->nodeValue;
 
-    $nLink = 'http://opac.unila.ac.id' . $nextLink->item(0)->attributes->item(0)->nodeValue;
+    // Mendapatkan nilai link halaman berikutnya
+    $nLink = NULL;
+    if($nextLink->item(0) != NULL)
+        $nLink = 'http://opac.unila.ac.id' . $nextLink->item(0)->attributes->item(0)->nodeValue;
 
 
     //foreach($nlist as $item) {
@@ -80,10 +87,12 @@ if($_GET){
     /* JSON */
     $respon =  new stdClass();
 
+    // Memberikan label
     $respon->label="OPAC.unila.ac.id";
+    // Memasukkan informasi hasil pencarian ke dalam obyek $respon
     $respon->info=$infohasil;
 
-
+    // Penampung nilai yang akan dimasukkan ke dalam obyek $respon
     $no = 0;
     $judul = '';
     $pengarang = '';
@@ -110,15 +119,16 @@ if($_GET){
                         } else if($i->nodeValue == 'customField availabilityField') {
                             $tersedia = $it->nodeValue;
                         } else if($i->nodeValue == 'subItem') {
-                            foreach($it->childNodes as $j) {
-                                if ($j->hasAttributes()) {
-                                    foreach($j->attributes as $k) {
-                                        if($k->nodeName == 'href') {
-                                            $cantuman = 'http://opac.unila.ac.id' . $k->nodeValue;
-                                        }
-                                    }
-                                }
-                            }
+                            $cantuman = 'http://opac.unila.ac.id' . $it->childNodes->item(0)->attributes->item(0)->nodeValue;
+//                            foreach($it->childNodes as $j) {
+//                                if ($j->hasAttributes()) {
+//                                    foreach($j->attributes as $k) {
+//                                        if($k->nodeName == 'href') {
+//                                            $cantuman = 'http://opac.unila.ac.id' . $k->nodeValue;
+//                                        }
+//                                    }
+//                                }
+//                            }
                         }
                     }
                 }
@@ -131,6 +141,7 @@ if($_GET){
 
     }
 
+    // Menambahkan link ke halaman berikut
     $respon->nextLink=$nLink;
 
     echo json_encode($respon);

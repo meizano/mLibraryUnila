@@ -20,14 +20,14 @@
         section: document.querySelectorAll('section'),
 
 
-//        isLoading: true,
-//        visibleCards: {},
-//        selectedCities: [],
-//        spinner: document.querySelector('.loader'),
-//        cardTemplate: document.querySelector('.cardTemplate'),
-//        container: document.querySelector('.main'),
-//        addDialog: document.querySelector('.dialog-container'),
-//        daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        //        isLoading: true,
+        //        visibleCards: {},
+        //        selectedCities: [],
+        //        spinner: document.querySelector('.loader'),
+        //        cardTemplate: document.querySelector('.cardTemplate'),
+        //        container: document.querySelector('.main'),
+        //        addDialog: document.querySelector('.dialog-container'),
+        //        daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     };
 
 
@@ -39,7 +39,7 @@
 
     // Menampilkan section berdasarkan id, digunakan pada saat tombol menu ditekan
     // pada eventListener click
-//    show(x[cari(x, '#opac')]);
+    //    show(x[cari(x, '#opac')]);
 
     /**************
     Pada saat app dimulai
@@ -47,7 +47,7 @@
     // Menyembunyikan seluruh section
     hide(app.section);
     //Menampilkan header
-//    show(app.section[cari(app.section, '#header')]);
+    //    show(app.section[cari(app.section, '#header')]);
 
     /*****************************************************************************
      *
@@ -64,41 +64,60 @@
 
         hide(app.header);
         hide(app.section);
-// show(app.section[cari(app.section, 'section#berita')]);
+        // show(app.section[cari(app.section, 'section#berita')]);
         show(app.section[0]);
     });
 
     document.getElementById('tblOpac').addEventListener('click', function () {
         hide(app.header);
         hide(app.section);
-// show(app.section[cari(app.section, 'section#opac')]);
+        // show(app.section[cari(app.section, 'section#opac')]);
         show(app.section[1]);
     });
 
-     document.getElementById('tblUniuca').addEventListener('click', function () {
+    document.getElementById('tblUniuca').addEventListener('click', function () {
         hide(app.header);
         hide(app.section);
         show(app.section[2]);
     });
 
-     document.getElementById('tblEbookejournal').addEventListener('click', function () {
+    document.getElementById('tblEbookejournal').addEventListener('click', function () {
         hide(app.header);
         hide(app.section);
         show(app.section[3]);
     });
 
-     document.getElementById('tblOpenaccess').addEventListener('click', function () {
+    document.getElementById('tblOpenaccess').addEventListener('click', function () {
         hide(app.header);
         hide(app.section);
         show(app.section[4]);
     });
 
-     document.getElementById('tblPeta').addEventListener('click', function () {
+    document.getElementById('tblPeta').addEventListener('click', function () {
         hide(app.header);
         hide(app.section);
         show(app.section[5]);
     });
 
+    document.getElementById('tblPeta').addEventListener('click', function () {
+        hide(app.header);
+        hide(app.section);
+        show(app.section[5]);
+    });
+
+
+    document.getElementById('cariOPAC').addEventListener('click', function () {
+        let keyword = document.querySelector('form#cariOPAC [name="keywords"]').value;
+        //        $('div#hasilOPAC').text("Menunggu hasil: " + keyword);
+        ajaxOPAC(keyword);
+    });
+
+    document.getElementById('cariUniUca').addEventListener('click', function () {
+        let keyword = document.querySelector('form#cariUniUca [name="keywords"]').value;
+//        $('div#hasilUniUca').text("Menunggu hasil: " + keyword);
+        ajaxUniUca(keyword);
+
+    });
 
     /*****************************************************************************
      *
@@ -138,7 +157,89 @@
      *
      ****************************************************************************/
 
+    function ajaxOPAC(kata) {
+        // Mengambil data JSON dari server
+        $.ajax({
+            dataType: "json",
+            type: "GET", //type bisa GET atau POST
+            url: "dispatcher/OPACjson.php", // URL dari web service JSON, dalam hal ini dilayani skrip PHP
+            data: "keywords=" + kata,
 
+            // jika pakai POST, pakai:
+            //                data: {login: username, passwd: password},
+
+
+            // Jika web service tidak merespon/gagal
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $('div#hasilOPAC').text("responseText: " + XMLHttpRequest.responseText +
+                    ", textStatus: " + textStatus +
+                    ", errorThrown: " + errorThrown);
+                $('div#hasilOPAC').removeClass();
+                $('div#hasilOPAC').addClass("alert alert-warning");
+            }, // error
+
+            // Jika web service merespon
+            // data yang mengandung nilai JSON akan dikembalikan oleh skrip PHP
+            success: function (data) {
+                $('div#hasilOPAC').hide(); // menyembunyikan login panel
+                $('div#hasilOPAC').removeAttr("style");
+                $('div#hasilOPAC').removeClass();
+                $('div#hasilOPAC').text("Hasil: " + data['info']); // key berhasil dan nilai dikembalikan
+                $('div#hasilOPAC').append('<br/>');
+                for (let i = 0; i < data['data'].length; i++) {
+                    $('div#hasilOPAC').append('<span>' + (i+1) + '. </span>');
+                    $('div#hasilOPAC').append('<a target="_blank" href="' + data['data'][i][4] + '" >' + data['data'][i][0] + '</a>');
+                    $('div#hasilOPAC').append('<span>' + data['data'][i][1] + '</span>');
+                    $('div#hasilOPAC').append('<span>' + data['data'][i][2] + '</span>');
+                    $('div#hasilOPAC').append('<span>' + data['data'][i][3] + '</span>');
+                    $('div#hasilOPAC').append('<br/>');
+                }
+                $('div#hasilOPAC').addClass("alert alert-success");
+            } // success
+        }); // ajax
+    }
+    
+     function ajaxUniUca(kata) {
+        // Mengambil data JSON dari server
+        $.ajax({
+            dataType: "json",
+            type: "GET", //type bisa GET atau POST
+            url: "dispatcher/UniUcajson.php", // URL dari web service JSON, dalam hal ini dilayani skrip PHP
+            data: "keywords=" + kata,
+
+            // jika pakai POST, pakai:
+            //                data: {login: username, passwd: password},
+
+
+            // Jika web service tidak merespon/gagal
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $('div#hasilUniUca').text("responseText: " + XMLHttpRequest.responseText +
+                    ", textStatus: " + textStatus +
+                    ", errorThrown: " + errorThrown);
+                $('div#hasilUniUca').removeClass();
+                $('div#hasilUniUca').addClass("alert alert-warning");
+            }, // error
+
+            // Jika web service merespon
+            // data yang mengandung nilai JSON akan dikembalikan oleh skrip PHP
+            success: function (data) {
+                $('div#hasilUniUca').hide(); // menyembunyikan login panel
+                $('div#hasilUniUca').removeAttr("style");
+                $('div#hasilUniUca').removeClass();
+                $('div#hasilUniUca').text("Hasil: " + data['info']); // key berhasil dan nilai dikembalikan
+                $('div#hasilUniUca').append('<br/>');
+                for (let i = 0; i < data['data'].length; i++) {
+                    $('div#hasilUniUca').append('<span>' + (i+1) + '. </span>');
+                    $('div#hasilUniUca').append('<a target="_blank" href="' + data['data'][i][4] + '" >' + data['data'][i][0] + '</a>');
+                    $('div#hasilUniUca').append('<span>' + data['data'][i][1] + '</span>');
+                    $('div#hasilUniUca').append('<span>' + data['data'][i][2] + '</span>');
+                    $('div#hasilUniUca').append('<span>' + data['data'][i][3] + '</span>');
+                    $('div#hasilUniUca').append('<br/>');
+                }
+                $('div#hasilUniUca').addClass("alert alert-success");
+            } // success
+        }); // ajax
+    }
 
     /************************************************************************
      *
@@ -162,7 +263,7 @@
     // TODO add service worker code here
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
-            navigator.serviceWorker.register('/sw.js').then(
+            navigator.serviceWorker.register('./sw.js').then(
                 function (registration) {
                     // Registration was successful
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);

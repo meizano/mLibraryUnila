@@ -25,13 +25,33 @@ if($_GET){
 
     $xpath = new DOMXPath($dom);
     // returns list
-    $info = $xpath->query("//div[@class='info']");
+    // Informasi jumlah hasil pencarian dan waktu
+    $info = $xpath->query("//div[@class='alert alert-info']");
+    // daftar pustaka yang ditemukan
     $nlist = $xpath->query("//div[@class='item']");
-    $nextLink = $xpath->query("//a[@class='next_link']");
+    // Mendapatkan link halaman berikutnya
+    $nextLink = $xpath->query("//div[@class='pagination pagingList']");
 
-    $infohasil = $info->item(0)->nodeValue;
-
-    $nLink = 'http://opac.unila.ac.id' . $nextLink->item(0)->attributes->item(0)->nodeValue;
+    // Mendapatkan nilai informasi hasil pencarian
+    $infohasil = $info->item(0)->childNodes->item(1)->nodeValue . " " . $info->item(0)->childNodes->item(2)->nodeValue;
+    
+    // Mendapatkan nilai link halaman berikutnya
+    $nLink = NULL;
+    if($nextLink->item(0) != NULL)
+        $nLink = 'http://opac.unila.ac.id/' . $nextLink->item(0)->childNodes->item(0)->childNodes->item(10)->childNodes->item(0)->attributes->item(0)->nodeValue;
+    
+    // Mencari link halaman lain
+//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(0)->childNodes->item(0)->attributes->item(0)->nodeValue;
+////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
+//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(2)->childNodes->item(0)->attributes->item(0)->nodeValue; 
+////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(3)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
+//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(4)->childNodes->item(0)->attributes->item(0)->nodeValue; 
+////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(5)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
+//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(6)->childNodes->item(0)->attributes->item(0)->nodeValue;
+////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(7)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
+//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(8)->childNodes->item(0)->attributes->item(0)->nodeValue;
+////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(9)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
+//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(10)->childNodes->item(0)->attributes->item(0)->nodeValue;
 
 
     //foreach($nlist as $item) {
@@ -80,10 +100,12 @@ if($_GET){
     /* JSON */
     $respon =  new stdClass();
 
-    $respon->label="OPAC.unila.ac.id";
+    // Memberikan label
+    $respon->label="opac.unila.ac.id/ucs";
+    // Memasukkan informasi hasil pencarian ke dalam obyek $respon
     $respon->info=$infohasil;
 
-
+    // Penampung nilai yang akan dimasukkan ke dalam obyek $respon
     $no = 0;
     $judul = '';
     $pengarang = '';
@@ -103,22 +125,23 @@ if($_GET){
                 if ($it->hasAttributes()) {
                     foreach($it->attributes as $i) {
 
-                        if($i->nodeValue == 'author') {
+                        if($i->nodeValue == 'subItem authorField') {
                             $pengarang = $it->nodeValue;
                         } else if($i->nodeValue == 'customField callNumberField') {
                             $callNumber = $it->nodeValue;
-                        } else if($i->nodeValue == 'customField availabilityField') {
+                        } else if($i->nodeValue == 'customField locationField') {
                             $tersedia = $it->nodeValue;
                         } else if($i->nodeValue == 'subItem') {
-                            foreach($it->childNodes as $j) {
-                                if ($j->hasAttributes()) {
-                                    foreach($j->attributes as $k) {
-                                        if($k->nodeName == 'href') {
-                                            $cantuman = 'http://opac.unila.ac.id' . $k->nodeValue;
-                                        }
-                                    }
-                                }
-                            }
+                            $cantuman = 'http://opac.unila.ac.id' . $it->childNodes->item(0)->attributes->item(0)->nodeValue;
+//                            foreach($it->childNodes as $j) {
+//                                if ($j->hasAttributes()) {
+//                                    foreach($j->attributes as $k) {
+//                                        if($k->nodeName == 'href') {
+//                                            $cantuman = 'http://opac.unila.ac.id' . $k->nodeValue;
+//                                        }
+//                                    }
+//                                }
+//                            }
                         }
                     }
                 }
@@ -131,6 +154,7 @@ if($_GET){
 
     }
 
+    // Menambahkan link ke halaman berikut
     $respon->nextLink=$nLink;
 
     echo json_encode($respon);
