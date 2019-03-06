@@ -6,7 +6,7 @@ if($_GET){
     $keywords = isset($_GET['keywords']) ? $_GET['keywords'] : NULL;
 
 
-    $url = "http://opac.unila.ac.id/ucs/index.php?search=Search&keywords=" . $keywords;
+    $url = "https://meizanoam.wordpress.com/?search=Search&keywords=" . $keywords;
     $ch = curl_init();
     $timeout = 5;
     curl_setopt($ch, CURLOPT_URL, $url);
