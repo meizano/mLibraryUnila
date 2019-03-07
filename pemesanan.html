@@ -50,7 +50,10 @@
 
     <!-- Theme CSS -->
     <link href="css/creative.css" rel="stylesheet">
-
+    
+    <!-- Pemesanan CSS -->
+    <link href="css/pemesanan.css" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -69,7 +72,7 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index.html" id="tblTop">Unila Library Mobile</a>
+                <a class="navbar-brand page-scroll" href="#page-top" id="tblTop">Unila Library Mobile</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -93,7 +96,7 @@
                         <a class="page-scroll" href="openaccess.html" id="tblOpenaccess">OpenAccess</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="login.html" id="tblLogin">Login</a>
+                            <a class="page-scroll" href="login.html" id="tblLogin">Login</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="pemesanan.html" id="tblPemesanan">Pemesanan</a>
@@ -108,37 +111,33 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <section id="opac">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">OPAC Unila</h2>
-                    <hr class="light">
-                    <form name="formOPAC" id="cariOPAC" class="form-search">
-                        <fieldset>
-                            <div class="input-append">
-                                <input type="hidden" name="search" value="search">
-                                <div class="input-group">
-                                    <input type="text" name="keywords" id="keyword" placeholder="Kata kunci pencarian" lang="id_ID" x-webkit-speech="x-webkit-speech" class="form-control input-lg input-xxlarge search-query">
-                                    <div class="input-group-btn">
-                                        <div class="btn btn-lg btn-success"><a href=# id="tblCariOPAC">Cari</a></div>
-                                        <!--                                        <button type="submit" class="btn btn-lg btn-success">Cari</button>-->
-                                    </div>
-                                </div>
-                        </fieldset>
-                    </form>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <hr class="light">
-                    <div id="hasilOPAC">
-                    </div>
-                </div>
-            </div>
+    <section id="Pemesanan">
+        <div class="text-center">
+            <div class="col-md-12"></div>
+            <h2 class="judul">mLibrary</h2>
         </div>
+        <div class="artikel">
+            <form action="#" method="post">
+                <div class="grup">
+                    <label for="Pemesanan">Pemesanan </label>
+                    <input type="text" placeholder="No Catalog/Panggil">
+                </div>
+                <div class="grup">
+                    <input type="submit" value="Booking">
+                </div>
+            </form>
+        </div>
+            <table align="center" border="4" width="800" height="150">
+            <tr>
+                <td bgcolor="white" align=center> Pinjam ?</td>
+            </tr>
+        </table>
+               <div class="text-center">
+                <div class="grup">
+                    <input type="submit" value="Ya">
+                    <input type="submit" value="Tidak">
+                </div>
+                </div>
     </section>
 
     <!-- Bootstrap Core JavaScript -->
@@ -151,12 +150,9 @@
 
     <!-- Theme JavaScript -->
     <script src="js/creative.min.js"></script>
-    
-    <!-- main logic -->
-    <script src="scripts/main.js"></script>
 
-    <!-- cari OPAC -->  
-    <script src="scripts/cariopac.js"></script>
+    <script src="scripts/app.js"></script>
+
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 'use strict';
-importScripts('sw-toolbox.js');
+importScripts('./sw-toolbox.js');
 toolbox.precache([
     "./",
     "./index.html",
@@ -18,4 +18,4 @@ toolbox.precache([
     "./vendor/magnific-popup/magnific-popup.css"
 ]);
 toolbox.router.get('./img/*', toolbox.cacheFirst);
-toolbox.router.get('/*', toolbox.networkFirst, { networkTimeoutSeconds: 5});
+toolbox.router.get('./*', toolbox.networkFirst, { networkTimeoutSeconds: 5});
