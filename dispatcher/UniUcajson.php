@@ -39,63 +39,6 @@ if($_GET){
     $nLink = NULL;
     if($nextLink->item(0) != NULL)
         $nLink = 'http://opac.unila.ac.id/' . $nextLink->item(0)->childNodes->item(0)->childNodes->item(10)->childNodes->item(0)->attributes->item(0)->nodeValue;
-    
-    // Mencari link halaman lain
-//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(0)->childNodes->item(0)->attributes->item(0)->nodeValue;
-////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(1)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
-//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(2)->childNodes->item(0)->attributes->item(0)->nodeValue; 
-////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(3)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
-//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(4)->childNodes->item(0)->attributes->item(0)->nodeValue; 
-////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(5)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
-//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(6)->childNodes->item(0)->attributes->item(0)->nodeValue;
-////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(7)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
-//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(8)->childNodes->item(0)->attributes->item(0)->nodeValue;
-////    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(9)->childNodes->item(0)->attributes->item(0)->nodeValue; //error
-//    echo $nextLink->item(0)->childNodes->item(0)->childNodes->item(10)->childNodes->item(0)->attributes->item(0)->nodeValue;
-
-
-    //foreach($nlist as $item) {
-    //    echo $item->nodeName;
-    //    echo $item->nodeValue;
-    //    echo "\n" . "<br/>" ."\n";
-
-    //    foreach($item->attributes as $ite) {
-    //        echo $ite->nodeName;
-    //    echo $ite->nodeValue;
-    //    echo "\n" . "<br/>" ."\n";
-    //    }
-
-    //    foreach($item->childNodes as $ite) {
-    //        foreach($ite->childNodes as $it) {
-    //            echo $it->nodeName;
-    //            if ($it->hasAttributes()) {
-    //                foreach($it->attributes as $i) {
-    //
-    //                        echo $i->nodeName;
-    //                        echo $i->nodeValue;
-    //                }
-    //            }
-    //            echo $it->nodeValue;
-    //            echo "\n" . "<br/>" ."\n";
-    //        }
-    //    }
-    //
-    //}
-
-    //for ($i = $nlist->length; --$i >= 0; ) {
-    //    $node = $nlist->item($i)->childNodes;
-    //    for ($i = $node->length; --$i >= 0; ) {
-    //        $nod = $node->item($i);
-    //        echo $nod->nodeValue;
-    //    }
-    //
-    //}
-
-
-    # Menampilkan dalam html
-    //$htmltext=$dom->saveHTML();
-    //
-    //echo $htmltext;
 
     /* JSON */
     $respon =  new stdClass();
@@ -133,15 +76,6 @@ if($_GET){
                             $tersedia = $it->nodeValue;
                         } else if($i->nodeValue == 'subItem') {
                             $cantuman = 'http://opac.unila.ac.id' . $it->childNodes->item(0)->attributes->item(0)->nodeValue;
-//                            foreach($it->childNodes as $j) {
-//                                if ($j->hasAttributes()) {
-//                                    foreach($j->attributes as $k) {
-//                                        if($k->nodeName == 'href') {
-//                                            $cantuman = 'http://opac.unila.ac.id' . $k->nodeValue;
-//                                        }
-//                                    }
-//                                }
-//                            }
                         }
                     }
                 }
@@ -151,7 +85,6 @@ if($_GET){
 
         $respon->data[$no]=array($judul, $pengarang, $callNumber, $tersedia, $cantuman);//ambil yang perlu saja
         $no+=1;
-
     }
 
     // Menambahkan link ke halaman berikut
