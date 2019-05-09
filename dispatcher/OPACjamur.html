@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html><head>
+<title>OPAC (Online Public Access Catalog) | UPT Perpustakaan Universitas Lampung :: OPAC</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="SLiMS (Senayan Library Management System) is an open source Library Management System. It is build on Open source technology like PHP and MySQL">
+<meta name="keywords" content="senayan,slims,library automation,free library application, library, perpustakaan, aplikasi perpustakaan">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index, nofollow">
+<!-- load style -->
+<link rel="shortcut icon" href="http://opac.unila.ac.id/webicon.ico" type="image/x-icon">
+<link href="OPACjamur_files/core.css" rel="stylesheet" type="text/css">
+<link href="OPACjamur_files/colorbox.css" rel="stylesheet" type="text/css">
+<link href="OPACjamur_files/style.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" media="all" href="OPACjamur_files/skin.css">
+<meta name="robots" content="index, follow"><script type="text/javascript" src="OPACjamur_files/jquery_003.js"></script>
+<script type="text/javascript" src="OPACjamur_files/form.js"></script>
+<script type="text/javascript" src="OPACjamur_files/gui.js"></script>
+<script type="text/javascript" src="OPACjamur_files/bootstrap.js"></script>
+<script type="text/javascript" src="OPACjamur_files/jquery_002.js"></script>
+<script type="text/javascript" src="OPACjamur_files/jquery.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+  <div id="masking"></div>
+  <!--// Social Button //-->
+  <div class="navbar navbar-social navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+                <ul class="nav">
+                    <li><a href="http://www.facebook.com/perpustakaan.unila/" title="Facebook">Facebook</a></li>
+                    <li><a href="http://twitter.com/#!/library_unila" title="Twitter">Twitter</a></li>
+                    <li><a href="http://www.youtube.com/user/senayanslims" title="Youtube">Youtube</a></li>
+                    <li><a href="https://github.com/slims/" title="Github">Github</a></li>
+                    <li><a href="http://slims.web.id/forum/" title="Forum">Forum</a></li>
+                    <li><a href="http://opac.unila.ac.id/index.php?rss=true" target="_blank" title="RSS" class="rss"><img src="OPACjamur_files/rss.png"></a></li>
+        </ul>
+                <form class="navbar-form pull-right language" name="langSelect" action="index.php" method="get">
+          <span class="language-info">Pilih Bahasa</span>
+          <select name="select_lang" id="select_lang" onchange="document.langSelect.submit();" class="input-medium">
+            <option value="ar_AR">Arabic</option><option value="bn_BD">Bengali</option><option value="pt_BR">Brazilian Portuguese</option><option value="cn_PRC">Cina</option><option value="kr_KR">Korea</option><option value="en_US">English</option><option value="es_ES">Espanol</option><option value="de_DE">German</option><option value="id_ID" selected="selected">Indonesia</option><option value="th_TH">Thai</option><option value="my_MY">Melayu</option><option value="fa_IR">Persia</option>          </select>
+        </form>
+      </div>
+    </div>
+  </div>  <!--// End Social Button //-->
+
+  <!--// Menu //-->
+  <div class="navbar navbar-menu navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="brand" href="http://opac.unila.ac.id/index.php">
+         <div class="sitename">OPAC (Online Public Access Catalog)</div>
+         <div class="subname">UPT Perpustakaan Universitas Lampung</div>
+        </a>
+        <div class="nav-collapse collapse">
+          <ul class="nav nav-pills pull-right">
+                    <li class="active"><a href="http://opac.unila.ac.id/index.php" title="Beranda depan">Beranda Depan</a></li>
+                    <li><a href="http://opac.unila.ac.id/index.php?p=libinfo" title="Info Perpustakaan">Info Perpustakaan</a></li>
+                    <li><a href="http://opac.unila.ac.id/sum" title="Registrasi Anggota">Registrasi Anggota</a></li>
+                    <li><a href="http://opac.unila.ac.id/index.php?p=usulbuku" title="Usul Buku">Usul Buku</a></li>
+                    <li><a href="http://opac.unila.ac.id/" title="Statistik">Statistik</a></li>
+                    <li><a href="http://opac.unila.ac.id/cgi-bin/awstats.pl" title="Statistik Pengunjung Web">Statistik Pengunjung Web</a></li>
+                    <li><a href="http://opac.unila.ac.id/index.php?p=suggestion_box" title="Kotak Saran Kritik">Kotak Saran Kritik</a></li>
+                    <li><a href="http://opac.unila.ac.id/index.php?p=login" title="MASUK Pustakawan">MASUK Pustakawan</a></li>
+                    </ul>
+        </div>
+      </div>
+    </div>
+  </div>  <!--// End Menu //-->
+
+<!--// Content Ouput //-->
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <!--// Check For No Query //-->
+              <!-- Main Content -->
+        <div class="span8">
+                    <div class="tagline">
+                        Koleksi                        <a href="javascript:%20history.back();" class="btn btn-mini btn-danger pull-right"><i class="icon icon-white icon-circle-arrow-left"></i> Kembali </a>
+          </div>
+          
+                      <div class="search">
+            <div id="simply-search">
+              <div class="simply">
+                <form name="advSearchForm" id="simplySearchForm" action="index.php" method="get" class="form-search">
+                  <div class="input-append">
+                  <input name="search" value="search" type="hidden">
+                  <input name="keywords" id="keyword" placeholder="Kata kunci" x-webkit-speech="x-webkit-speech" class="input-xxlarge search-query" type="text" lang="id_ID">
+                  <button type="submit" class="btn">Pencarian</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div id="advance-search" style="display:none;">
+             <form name="advSearchForm" id="advSearchForm" action="index.php" method="get" class="form-horizontal form-search">
+                <div class="simply">
+                  <div class="input-append">
+                  <input name="title" id="title" placeholder="Judul" class="input-xxlarge search-query" autocomplete="off" style="" type="text">
+                  <button type="submit" class="btn" name="search" value="search">Pencarian</button>
+                  </div>
+                </div>
+                <div class="advance">
+                  <div class="row-fluid">
+                  <div class="span5">
+                    <div class="control-group">
+                      <label class="control-label">Pengarang</label>
+                      <div class="controls">
+                        <input autocomplete="off" id="author" name="author" class="ajaxInputField notAJAX" onkeyup="showDropDown('lib/contents/advsearch_AJAX_response.php', 'author', 'type=author')" type="text"><ul class="ajaxDDlist" id="authorList"><li style="padding: 2px; font-weight: bold;">SEARCHING...</li></ul>                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">Subyek</label>
+                      <div class="controls">
+                        <input autocomplete="off" id="subject" name="subject" class="ajaxInputField notAJAX" onkeyup="showDropDown('lib/contents/advsearch_AJAX_response.php', 'subject', 'type=topic')" type="text"><ul class="ajaxDDlist" id="subjectList"><li style="padding: 2px; font-weight: bold;">SEARCHING...</li></ul>                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">ISBN/ISSN</label>
+                      <div class="controls">
+                        <input name="isbn" autocomplete="off" type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="span6">
+
+                    <div class="control-group">
+                    <label class="control-label">GMD</label>
+                    <div class="controls">
+                      <select name="gmd"><option value="0" selected="selected">Semua GMD/Media</option><option value="Buku">Buku</option><option value="Buku Ajar">Buku Ajar</option><option value="Default">Default</option><option value="Diktat">Diktat</option><option value="Jurnal">Jurnal</option><option value="Lampung Corner">Lampung Corner</option><option value="Laporan Akhir">Laporan Akhir</option><option value="Majalah Ilmiah">Majalah Ilmiah</option><option value="Majalah Populer">Majalah Populer</option><option value="Penelitian Tindakan Kelas">Penelitian Tindakan Kelas</option><option value="Reference Book">Reference Book</option><option value="Rekaman Suara">Rekaman Suara</option><option value="Rekaman Video/Film">Rekaman Video/Film</option><option value="Skripsi">Skripsi</option><option value="Tesis">Tesis</option><option value="Tugas Akhir">Tugas Akhir</option></select>
+                    </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">Tipe Koleksi</label>
+                      <div class="controls">
+                        <select name="colltype"><option value="0" selected="selected">Semua Koleksi</option><option value="Fiction">Fiction</option><option value="Non Piction">Non Piction</option></select>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">Lokasi</label>
+                      <div class="controls">
+                        <select name="location"> <option value="0" selected="selected">Semua Lokasi</option><option value="BI Corner">BI Corner</option><option value="Fakultas Ekonomi &amp; Bisnis">Fakultas Ekonomi &amp; Bisnis</option><option value="Fakultas Hukum">Fakultas Hukum</option><option value="Fakultas Ilmu Sosial dan Ilmu Politik">Fakultas Ilmu Sosial dan Ilmu Politik</option><option value="Fakultas Ilmu Sosial dan Ilmu Politik - Pusdokinfo">Fakultas Ilmu Sosial dan Ilmu Politik - Pusdokinfo</option><option value="Fakultas Kedokteran">Fakultas Kedokteran</option><option value="Fakultas Keguruan dan Ilmu Pendidikan">Fakultas Keguruan dan Ilmu Pendidikan</option><option value="Fakultas Keguruan dan Ilmu Pendidikan - Geografi">Fakultas Keguruan dan Ilmu Pendidikan - Geografi</option><option value="Fakultas Matematika dan Ilmu Pengatahuan Alam">Fakultas Matematika dan Ilmu Pengatahuan Alam</option><option value="Fakultas Pertanian">Fakultas Pertanian</option><option value="Fakultas Pertanian - Agroteknologi">Fakultas Pertanian - Agroteknologi</option><option value="Fakultas Pertanian - D3 Perkebunan">Fakultas Pertanian - D3 Perkebunan</option><option value="Fakultas Pertanian - THP">Fakultas Pertanian - THP</option><option value="Fakultas Teknik">Fakultas Teknik</option><option value="FISIP - Ilmu Komunikasi">FISIP - Ilmu Komunikasi</option><option value="Lampung Corner">Lampung Corner</option><option value="Pascasarjana">Pascasarjana</option><option value="Perpustakaan Pusat">Perpustakaan Pusat</option><option value="Ruang Baca UPT Labolatorium Terpadu dan Sentra Inovasi Teknologi">Ruang Baca UPT Labolatorium Terpadu dan Sentra Inovasi Teknologi</option></select>
+                      </div>
+                    </div>
+                </div>
+                </div>
+                <div class="clearfix"></div>
+              
+              </div></form>
+            </div>
+            <div id="show_advance">
+              <a href="#">Pencarian Spesifik</a>
+            </div>
+            </div>
+          <div class="info">
+            <div class="search-found-info">Ditemukan  <strong>51</strong> dari pencarian Anda melalui kata kunci: <strong class="search-found-info-keywords"><span class="search-keyword-info" title="jamur">jamur</span></strong></div><div class="search-query-time">Permintaan membutuhkan <b>1.06222</b> detik untuk selesai</div><div><a href="http://opac.unila.ac.id/index.php?resultXML=true&amp;search=search&amp;keywords=jamur" class="xmlResultLink" target="_blank" title="View Result in XML Format" style="clear: both;">XML Result</a></div>          </div>
+          
+                      <div class="biblioPaging"><span class="pagingList"> &nbsp;<b>1</b>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=2" target="_self">2</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=3" target="_self">3</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=4" target="_self">4</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=5" target="_self">5</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=2" target="_self" class="next_link">Berikutnya</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=6" target="_self" class="last_link">Halaman Akhir</a>&nbsp; 
+</span></div><div class="item"><div class="cover-list"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=21779&amp;keywords=jamur" class="titleField" title="Detail Cantuman"><span class="highlight">Jamur</span> merang dan budidayanya</a></h4><div class="author"><b>Pengarang</b> : Meity Suradji Sinaga - </div><div class="customField callNumberField"><b>No. Panggil</b> : 635.8 Sin j</div><div class="customField availabilityField"><b>Ketersediaan</b> : 28 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=21779&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=21779&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D21779%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D21779%26keywords%3Djamur&amp;text=Jamur+merang+dan+budidayanya" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D21779%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D21779%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D21779%26keywords%3Djamur&amp;title=Jamur+merang+dan+budidayanya" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D21779%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D21779%26keywords%3Djamur&amp;title=Jamur+merang+dan+budidayanya" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="item"><div class="cover-list"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91683&amp;keywords=jamur" class="titleField" title="Detail Cantuman">Usaha pembibitan <span class="highlight">jamur</span>/  </a></h4><div class="author"><b>Pengarang</b> : Gunawan, Agustin Wydia - </div><div class="customField callNumberField"><b>No. Panggil</b> : 635.8 Gun u</div><div class="customField availabilityField"><b>Ketersediaan</b> : 1 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91683&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91683&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91683%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91683%26keywords%3Djamur&amp;text=Usaha+pembibitan+jamur%2F++" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91683%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91683%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91683%26keywords%3Djamur&amp;title=Usaha+pembibitan+jamur%2F++" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91683%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91683%26keywords%3Djamur&amp;title=Usaha+pembibitan+jamur%2F++" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="item"><div class="cover-list"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91254&amp;keywords=jamur" class="titleField" title="Detail Cantuman">Budi daya <span class="highlight">jamur</span> kompos :<span class="highlight">jamur</span> merang, <span class="highlight">jamur</span> kancing (Champignon) / </a></h4><div class="author"><b>Pengarang</b> : Widiyastuti, Budhi - </div><div class="customField callNumberField"><b>No. Panggil</b> : 635.8 Wid b</div><div class="customField availabilityField"><b>Ketersediaan</b> : 1 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91254&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91254&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91254%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91254%26keywords%3Djamur&amp;text=Budi+daya+jamur+kompos+%3Ajamur+merang%2C+jamur+kancing+%28Champignon%29+%2F+" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91254%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91254%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91254%26keywords%3Djamur&amp;title=Budi+daya+jamur+kompos+%3Ajamur+merang%2C+jamur+kancing+%28Champignon%29+%2F+" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91254%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91254%26keywords%3Djamur&amp;title=Budi+daya+jamur+kompos+%3Ajamur+merang%2C+jamur+kancing+%28Champignon%29+%2F+" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="item"><div class="cover-list"><img src="OPACjamur_files/phpThumb_002.htm" width="90" height="115"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91266&amp;keywords=jamur" class="titleField" title="Detail Cantuman">Budidaya <span class="highlight">jamur</span> konsumsi :  menangguk untuk dari budi daya <span class="highlight">jamur</span> tiram dan kuping / </a></h4><div class="author"><b>Pengarang</b> : Wiardani,  Isnaen - </div><div class="customField callNumberField"><b>No. Panggil</b> : 635.8 Wia b</div><div class="customField availabilityField"><b>Ketersediaan</b> : 10 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91266&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91266&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91266%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91266%26keywords%3Djamur&amp;text=Budidaya+jamur+konsumsi+%3A++menangguk+untuk+dari+budi+daya+jamur+tiram+dan+kuping+%2F+" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91266%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91266%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91266%26keywords%3Djamur&amp;title=Budidaya+jamur+konsumsi+%3A++menangguk+untuk+dari+budi+daya+jamur+tiram+dan+kuping+%2F+" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91266%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91266%26keywords%3Djamur&amp;title=Budidaya+jamur+konsumsi+%3A++menangguk+untuk+dari+budi+daya+jamur+tiram+dan+kuping+%2F+" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="item"><div class="cover-list"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91413&amp;keywords=jamur" class="titleField" title="Detail Cantuman"><span class="highlight">Jamur</span> tiram  /  pembibitan, pembudidayaan, analisis usaha / </a></h4><div class="author"><b>Pengarang</b> : Cahyana YA, - Bakrun, M. - Muchrodji - </div><div class="customField callNumberField"><b>No. Panggil</b> : 635.8 Cah j</div><div class="customField availabilityField"><b>Ketersediaan</b> : 5 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91413&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91413&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91413%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91413%26keywords%3Djamur&amp;text=Jamur+tiram++%2F++pembibitan%2C+pembudidayaan%2C+analisis+usaha+%2F+" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91413%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91413%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91413%26keywords%3Djamur&amp;title=Jamur+tiram++%2F++pembibitan%2C+pembudidayaan%2C+analisis+usaha+%2F+" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91413%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91413%26keywords%3Djamur&amp;title=Jamur+tiram++%2F++pembibitan%2C+pembudidayaan%2C+analisis+usaha+%2F+" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="item"><div class="cover-list"><img src="OPACjamur_files/phpThumb.htm" width="90" height="115"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=75573&amp;keywords=jamur" class="titleField" title="Detail Cantuman">Strategi pengelolaan penyakit tanaman hutan di Indonesia :penyakit karat tumor pada tanaman sengon (Falcataria Moluccana)  / </a></h4><div class="author"><b>Pengarang</b> : Rahayu, sri - </div><div class="customField callNumberField"><b>No. Panggil</b> : 632.4 Rah s</div><div class="customField availabilityField"><b>Ketersediaan</b> : 1 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=75573&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=75573&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D75573%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D75573%26keywords%3Djamur&amp;text=Strategi+pengelolaan+penyakit+tanaman+hutan+di+Indonesia+%3Apenyakit+karat+tumor+pada+tanaman+sengon+%28Falcataria+Moluccana%29++%2F+" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D75573%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D75573%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D75573%26keywords%3Djamur&amp;title=Strategi+pengelolaan+penyakit+tanaman+hutan+di+Indonesia+%3Apenyakit+karat+tumor+pada+tanaman+sengon+%28Falcataria+Moluccana%29++%2F+" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D75573%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D75573%26keywords%3Djamur&amp;title=Strategi+pengelolaan+penyakit+tanaman+hutan+di+Indonesia+%3Apenyakit+karat+tumor+pada+tanaman+sengon+%28Falcataria+Moluccana%29++%2F+" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="item"><div class="cover-list"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91043&amp;keywords=jamur" class="titleField" title="Detail Cantuman">Penyakit karena <span class="highlight">jamur</span> :kompendium penyakit - penyakit kacang tanah,Ed.1 / </a></h4><div class="author"><b>Pengarang</b> : Soesanto, Loekas - </div><div class="customField callNumberField"><b>No. Panggil</b> : 632. 4 Soe p</div><div class="customField availabilityField"><b>Ketersediaan</b> : 40 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91043&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=91043&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91043%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91043%26keywords%3Djamur&amp;text=Penyakit+karena+jamur+%3Akompendium+penyakit+-+penyakit+kacang+tanah%2CEd.1+%2F+" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91043%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91043%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91043%26keywords%3Djamur&amp;title=Penyakit+karena+jamur+%3Akompendium+penyakit+-+penyakit+kacang+tanah%2CEd.1+%2F+" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91043%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D91043%26keywords%3Djamur&amp;title=Penyakit+karena+jamur+%3Akompendium+penyakit+-+penyakit+kacang+tanah%2CEd.1+%2F+" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="item"><div class="cover-list"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=88914&amp;keywords=jamur" class="titleField" title="Detail Cantuman">Animal models in medical mycology / </a></h4><div class="author"><b>Pengarang</b> : Miyaji, Makoto - </div><div class="customField callNumberField"><b>No. Panggil</b> : 616.969 Ani a</div><div class="customField availabilityField"><b>Ketersediaan</b> : 1 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=88914&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=88914&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88914%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88914%26keywords%3Djamur&amp;text=Animal+models+in+medical+mycology+%2F+" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88914%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88914%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88914%26keywords%3Djamur&amp;title=Animal+models+in+medical+mycology+%2F+" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88914%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88914%26keywords%3Djamur&amp;title=Animal+models+in+medical+mycology+%2F+" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="item"><div class="cover-list"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=88171&amp;keywords=jamur" class="titleField" title="Detail Cantuman"><span class="highlight">Jamur</span> konsumsi berkhasiat obat / </a></h4><div class="author"><b>Pengarang</b> : Hendritomo, Henky Isnawan - </div><div class="customField callNumberField"><b>No. Panggil</b> : 589.204 Hen j</div><div class="customField availabilityField"><b>Ketersediaan</b> : 10 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=88171&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=88171&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88171%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88171%26keywords%3Djamur&amp;text=Jamur+konsumsi+berkhasiat+obat+%2F+" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88171%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88171%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88171%26keywords%3Djamur&amp;title=Jamur+konsumsi+berkhasiat+obat+%2F+" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88171%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88171%26keywords%3Djamur&amp;title=Jamur+konsumsi+berkhasiat+obat+%2F+" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="item"><div class="cover-list"></div><div class="detail-list"><h4><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=88191&amp;keywords=jamur" class="titleField" title="Detail Cantuman">Methods general and molecular bacteriology / </a></h4><div class="author"><b>Pengarang</b> : Krieg, Noel R. - Gerhardt,  Philipp - Murray, R.G.E. - Wood, Willis E. - </div><div class="customField callNumberField"><b>No. Panggil</b> : 589.90078 Met m</div><div class="customField availabilityField"><b>Ketersediaan</b> : 1 copies available for loan</div><div class="subItem"><a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=88191&amp;keywords=jamur" class="detailLink" title="Detail Cantuman">Detail Cantuman</a> <a href="http://opac.unila.ac.id/index.php?p=show_detail&amp;id=88191&amp;keywords=jamur&amp;inXML=true" class="xmlDetailLink" title="View Detail in XML Format" target="_blank">XML Detail</a></div>
+<ul class="share-buttons"><li>Bagikan: </li><li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88191%26keywords%3Djamur" title="Facebook" target="_blank"><img src="OPACjamur_files/fb.gif" alt="Facebook"></a></li><li><a href="http://twitter.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88191%26keywords%3Djamur&amp;text=Methods+general+and+molecular+bacteriology+%2F+" title="Twitter" target="_blank"><img src="OPACjamur_files/tw.gif" alt="Twitter"></a></li><li><a href="https://plus.google.com/share?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88191%26keywords%3Djamur" title="Google Plus" target="_blank"><img src="OPACjamur_files/gplus.gif" alt="Google"></a></li><li><a href="http://www.digg.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88191%26keywords%3Djamur" title="Digg It" target="_blank"><img src="OPACjamur_files/digg.gif" alt="Digg"></a></li><li><a href="http://reddit.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88191%26keywords%3Djamur&amp;title=Methods+general+and+molecular+bacteriology+%2F+" title="Reddit" target="_blank"><img src="OPACjamur_files/rdit.gif" alt="Reddit"></a></li><li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88191%26keywords%3Djamur" title="LinkedIn" target="_blank"><img src="OPACjamur_files/lin.gif" alt="LinkedIn"></a></li><li><a href="http://www.stumbleupon.com/submit?url=http%3A%2F%2Fopac.unila.ac.id%2Findex.php%3Fp%3Dshow_detail%26id%3D88191%26keywords%3Djamur&amp;title=Methods+general+and+molecular+bacteriology+%2F+" title="Stumbleupon" target="_blank"><img src="OPACjamur_files/su.gif" alt="StumbleUpon"></a></li></ul>
+</div></div>
+<div class="biblioPaging"><span class="pagingList"> &nbsp;<b>1</b>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=2" target="_self">2</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=3" target="_self">3</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=4" target="_self">4</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=5" target="_self">5</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=2" target="_self" class="next_link">Berikutnya</a>&nbsp; 
+ &nbsp;<a href="http://opac.unila.ac.id/index.php?search=search&amp;keywords=jamur&amp;page=6" target="_self" class="last_link">Halaman Akhir</a>&nbsp; 
+</span></div><br>
+          
+                </div>
+                <!-- End Main Content -->
+
+        <div class="span4">
+          <!--// If Member Logged //-->
+                    <div class="sidebar">
+            <div class="tagline">
+              Informasi            </div>
+            <div class="info">
+              Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog            </div>
+          </div>
+                    <!--// End Member Logged //-->
+          <br>
+
+          <!--// Show if clustering search is enabled //-->
+                              <!--// End Show if clustering search is enabled //-->
+          
+        </div>
+
+          </div>
+  </div>
+
+    
+  
+
+</div>  <!--// End Content Ouput //-->
+
+<div class="footer">
+ <div class="container">
+  <div class="row">
+    <div class="span12 lisence">
+     This software and this template are released Under GNU GPL License 
+Version 3 - The Winner in the Category of OSS Indonesia ICT Award 2009
+   </div>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript" src="OPACjamur_files/supersized.js"></script>
+<script type="text/javascript" src="OPACjamur_files/highlight.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+  $.supersized(
+  {
+    slides  : [
+    {image : 'template/birulook/img/4.jpg'},
+    {image : 'template/birulook/img/3.jpg'},
+    {image : 'template/birulook/img/22.jpg'},
+    {image : 'template/birulook/img/1.jpg'}
+    ]
+  });
+});
+
+$(document).ready(function()
+{
+  $('#keyword').keyup(function(){
+    $('#title').val();
+    $('#title').val($('#keyword').val());
+  });
+
+  $('#title').keyup(function(){
+    $('#keyword').val();
+    $('#keyword').val($('#title').val());
+  });
+
+  $('#advSearchForm input').attr('autocomplete','off');
+  $('#title').attr('style','');
+
+  $('#show_advance').click(function(){
+    if ($("#advance-search").is(":hidden"))
+    {
+      $("#advance-search").slideDown('normal');
+      $('#simply-search').slideUp('normal');
+    } else {
+      $("#advance-search").slideUp('normal');
+      $('#simply-search').slideDown('normal');
+    }
+  });
+
+  $('#title').keypress(function(e){
+    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+      this.form.submit();
+    }
+  });
+
+  $(window).load(function () {
+    $('#keyword').focus();
+  });
+
+  function mycarousel_initCallback(carousel)
+  {
+    // Disable autoscrolling if the user clicks the prev or next button.
+    carousel.buttonNext.bind('click', function() {
+      carousel.startAuto(0);
+    });
+
+    carousel.buttonPrev.bind('click', function() {
+      carousel.startAuto(0);
+    });
+
+    // Pause autoscrolling if the user moves with the cursor over the clip.
+    carousel.clip.hover(function() {
+      carousel.stopAuto();
+    }, function() {
+      carousel.startAuto();
+    });
+  };
+
+  jQuery('#topbook').jcarousel({
+      auto: 5,
+      wrap: 'last',
+      initCallback: mycarousel_initCallback
+  });
+
+  jQuery('.container .item .detail-list, .coll-detail .title, .abstract, .coll-detail .controls').highlight(['jamur','']);
+
+});
+</script>
+
+
+
+<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div><button type="button" id="cboxClose"></button></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><ul id="supersized" class="quality" style="visibility: visible;"><li class="slide-0" style="visibility: visible; opacity: 1;"><a target="_blank"><img src="OPACjamur_files/4.jpg" style="width: 1680.36px; left: 0px; top: 0px; height: 941px;"></a></li><li class="slide-1 prevslide" style="visibility: visible; opacity: 1;"><a target="_blank"><img src="OPACjamur_files/3.jpg" style="width: 1680.36px; left: 0px; top: 0px; height: 941px;"></a></li><li class="slide-2 activeslide" style="visibility: visible; opacity: 1;"><a target="_blank"><img src="OPACjamur_files/22.jpg" style="height: 941px; width: 1680.36px; left: 0px; top: 0px;"></a></li><li class="slide-3" style="visibility: visible; opacity: 1;"><a target="_blank"><img src="OPACjamur_files/1.jpg" style="height: 941px; width: 1680.36px; left: 0px; top: 0px;"></a></li></ul></body></html>
