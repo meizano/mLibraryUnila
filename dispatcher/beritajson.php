@@ -1,12 +1,12 @@
 <?php
 
-# Use the Curl extension to query and get back a page of results
-if($_GET){
-    // Jika input type tidak ada, diberi nilai NULL
-    $keywords = isset($_GET['keywords']) ? $_GET['keywords'] : NULL;
 
+    ## BAGIAN 1 MENGOLAH HTML MENJADI OBYEK PHP ##
+    # Mengambil HTML
+    // $url = "http://library.unila.ac.id/web/;
+    $url = "http://localhost/git/mLibraryUnila/dispatcher/weblibunila.html";
 
-    $url = "https://meizanoam.wordpress.com/?search=Search&keywords=" . $keywords;
+    # Use the Curl extension to query and get back a page of results
     $ch = curl_init();
     $timeout = 5;
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -22,75 +22,87 @@ if($_GET){
     # The @ before the method call suppresses any warnings that
     # loadHTML might throw because of invalid HTML in the page.
     @$dom->loadHTML($html);
+    # Mencetak HTML
+    print_r($dom->saveHTML());
 
+    # Create DOMXPath Object and load DOMDocument Object into XPath for magical goodness
     $xpath = new DOMXPath($dom);
-    // returns list
-    // Informasi jumlah hasil pencarian dan waktu
-    $info = $xpath->query("//div[@class='alert alert-info']");
-    // daftar pustaka yang ditemukan
-    $nlist = $xpath->query("//div[@class='item']");
-    // Mendapatkan link halaman berikutnya
-    $nextLink = $xpath->query("//div[@class='pagination pagingList']");
 
-    // Mendapatkan nilai informasi hasil pencarian
-    $infohasil = $info->item(0)->childNodes->item(1)->nodeValue . " " . $info->item(0)->childNodes->item(2)->nodeValue;
+    # returns list
+    # Mencari nilai berdasarkan persyaratan kondisi query
+
+    # Himpunan/kumpulan daftar pustaka yang ditemukan berdasarkan <div class="item">
+    $nlist = $xpath->query("//article[@class='post']"); 
     
-    // Mendapatkan nilai link halaman berikutnya
-    $nLink = NULL;
-    if($nextLink->item(0) != NULL)
-        $nLink = 'http://opac.unila.ac.id/' . $nextLink->item(0)->childNodes->item(0)->childNodes->item(10)->childNodes->item(0)->attributes->item(0)->nodeValue;
+    # Mendapatkan link/tautan halaman berikutnya berdasarkan <a class="next_link">
+    $nextLink = $xpath->query("//div[@class='nav-previous']");
 
+    # Jika satu halaman
+    $nLink = NULL;
+    # Jika lebih dari satu halaman, maka dibuat link halaman berikut
+    # ditambahkan absolute URL karena tautan yang tersimpan masih menggunakan relative URL
+    if($nextLink->item(0) != NULL) {
+        $nLink = $nextLink->item(0)->nodeValue; // masih salah, perlu ambil link
+        // print_r($nLink);
+    }
+
+    ## AKHIR BAGIAN 1 MENGOLAH HTML MENJADI OBYEK PHP ##
+
+    ## BAGIAN 2 MEMBUAT RESPON KELUARAN JSON DARI OBYEK PHP ##
     /* JSON */
+    # Obyek $respon menampung seluruh nilai yang akan diekspor ke JSON
     $respon =  new stdClass();
 
-    // Memberikan label
-    $respon->label="opac.unila.ac.id/ucs";
-    // Memasukkan informasi hasil pencarian ke dalam obyek $respon
-    $respon->info=$infohasil;
+    # Memberikan label, Sebagai penanda bahwa ini adalah data dari opac.unila.ac.id
+    $respon->label="library.unila.ac.id/web";
 
-    // Penampung nilai yang akan dimasukkan ke dalam obyek $respon
-    $no = 0;
-    $judul = '';
-    $pengarang = '';
-    $callNumber = '';
-    $tersedia = '';
-        $cantuman = '';
+    # Penampung nilai yang akan dimasukkan ke dalam obyek $respon
+    $no = 0; // sebagai nomor urut
+    $judul = ''; // judul 
+    $pengarang = ''; // pengarang 
+    $berita = ''; // berita
+    $tautan = ''; // tautan menuju rincian 
 
+    # Menjadikan kumpulan elemen pada $nslist menjadi sebuah obyek $item (yang mewakili satu buah daftar pustaka)
     foreach($nlist as $item) {
-
+        # Menjadikan setiap elemen dom di dalam obyek $item sebagai $ite
         foreach($item->childNodes as $ite) {
+            # Menjadikan setiap elemen dom di dalam obyek $ite sebagai $it
             foreach($ite->childNodes as $it) {
-                if($it->nodeName == 'h4') {
+                # jika ada $it yang memiliki tag html h2, dimasukkan sebagai nilai $judul
+                if($it->nodeName == 'h2') {
                     $judul = $it->nodeValue;
                     continue;
                 }
-                // Agar tidak muncul warning https://stackoverflow.com/questions/2385834/php-dom-get-all-attributes-of-a-node
+                # jika ada tag pada $it yang memiliki atribut, diperiksa disini
+                # Agar tidak muncul warning https://stackoverflow.com/questions/2385834/php-dom-get-all-attributes-of-a-node
                 if ($it->hasAttributes()) {
                     foreach($it->attributes as $i) {
-
-                        if($i->nodeValue == 'subItem authorField') {
+                        # jika ada yang memiliki atribut 'author', dimasukkan sebagai nilai $pengarang
+                        if($i->nodeValue == 'author vcard') {
                             $pengarang = $it->nodeValue;
-                        } else if($i->nodeValue == 'customField callNumberField') {
-                            $callNumber = $it->nodeValue;
-                        } else if($i->nodeValue == 'customField locationField') {
-                            $tersedia = $it->nodeValue;
-                        } else if($i->nodeValue == 'subItem') {
-                            $cantuman = 'http://opac.unila.ac.id' . $it->childNodes->item(0)->attributes->item(0)->nodeValue;
+                        } 
+                        # jika ada yang memiliki atribut 'entry-content', dimasukkan sebagai nilai $berita
+                        else if($i->nodeValue == 'entry-content') {
+                            $berita = $it->nodeValue;
                         }
                     }
                 }
-
             }
         }
 
-        $respon->data[$no]=array($judul, $pengarang, $callNumber, $tersedia, $cantuman);//ambil yang perlu saja
+        # Menambahkan data yang dikumpulkan dari $item dan menyusunnya sesuai keperluan ke dalam key data
+        # $no digunakan sebagai indeks dari data
+        $respon->data[$no]=array($judul, $pengarang, $berita);//ambil yang perlu saja
+        
+        # setelah data satuan ditambahkan ke key data, indeks ditambahkan satu
         $no+=1;
     }
 
-    // Menambahkan link ke halaman berikut
+    # Menambahkan informasi link/tautan ke halaman berikut
     $respon->nextLink=$nLink;
 
     echo json_encode($respon);
     /* JSON */
-}
+    ## AKHIR BAGIAN 2 MEMBUAT RESPON KELUARAN JSON DARI OBYEK PHP ##
 ?>
