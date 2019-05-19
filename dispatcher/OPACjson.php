@@ -4,8 +4,6 @@
 if($_GET){
     // Jika input type tidak ada, diberi nilai NULL
     $keywords = isset($_GET['keywords']) ? $_GET['keywords'] : NULL;
-
-
     $url = "http://opac.unila.ac.id/index.php?search=search&keywords=" . $keywords;
     $ch = curl_init();
     $timeout = 5;
@@ -22,7 +20,6 @@ if($_GET){
     # The @ before the method call suppresses any warnings that
     # loadHTML might throw because of invalid HTML in the page.
     @$dom->loadHTML($html);
-
     $xpath = new DOMXPath($dom);
     // returns list
     // Informasi jumlah hasil pencarian dan waktu

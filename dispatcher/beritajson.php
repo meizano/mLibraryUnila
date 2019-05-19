@@ -2,11 +2,9 @@
 
 # Use the Curl extension to query and get back a page of results
 if($_GET){
-    // Jika input type tidak ada, diberi nilai NULL
-    $keywords = isset($_GET['keywords']) ? $_GET['keywords'] : NULL;
 
-
-    $url = "https://meizanoam.wordpress.com/?search=Search&keywords=" . $keywords;
+//    $url = "library_unila.html" ;
+    $url = "http://library.unila.ac.id/web/";
     $ch = curl_init();
     $timeout = 5;
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -22,73 +20,59 @@ if($_GET){
     # The @ before the method call suppresses any warnings that
     # loadHTML might throw because of invalid HTML in the page.
     @$dom->loadHTML($html);
-
+    print_r($dom->saveHTML());
     $xpath = new DOMXPath($dom);
     // returns list
-    // Informasi jumlah hasil pencarian dan waktu
-    $info = $xpath->query("//div[@class='alert alert-info']");
-    // daftar pustaka yang ditemukan
-    $nlist = $xpath->query("//div[@class='item']");
-    // Mendapatkan link halaman berikutnya
-    $nextLink = $xpath->query("//div[@class='pagination pagingList']");
-
-    // Mendapatkan nilai informasi hasil pencarian
-    $infohasil = $info->item(0)->childNodes->item(1)->nodeValue . " " . $info->item(0)->childNodes->item(2)->nodeValue;
-    
-    // Mendapatkan nilai link halaman berikutnya
-    $nLink = NULL;
-    if($nextLink->item(0) != NULL)
-        $nLink = 'http://opac.unila.ac.id/' . $nextLink->item(0)->childNodes->item(0)->childNodes->item(10)->childNodes->item(0)->attributes->item(0)->nodeValue;
+    // berita yang ditampilkan
+    $nlist = $xpath->query("//article");
+    echo $nlist->asXML();
 
     /* JSON */
     $respon =  new stdClass();
 
     // Memberikan label
-    $respon->label="opac.unila.ac.id/ucs";
-    // Memasukkan informasi hasil pencarian ke dalam obyek $respon
-    $respon->info=$infohasil;
-
+    $respon->label="library.unila.ac.id/web";
+    $respon->article = $nlist;
+    
     // Penampung nilai yang akan dimasukkan ke dalam obyek $respon
-    $no = 0;
-    $judul = '';
-    $pengarang = '';
-    $callNumber = '';
-    $tersedia = '';
-        $cantuman = '';
-
-    foreach($nlist as $item) {
-
-        foreach($item->childNodes as $ite) {
-            foreach($ite->childNodes as $it) {
-                if($it->nodeName == 'h4') {
-                    $judul = $it->nodeValue;
-                    continue;
-                }
-                // Agar tidak muncul warning https://stackoverflow.com/questions/2385834/php-dom-get-all-attributes-of-a-node
-                if ($it->hasAttributes()) {
-                    foreach($it->attributes as $i) {
-
-                        if($i->nodeValue == 'subItem authorField') {
-                            $pengarang = $it->nodeValue;
-                        } else if($i->nodeValue == 'customField callNumberField') {
-                            $callNumber = $it->nodeValue;
-                        } else if($i->nodeValue == 'customField locationField') {
-                            $tersedia = $it->nodeValue;
-                        } else if($i->nodeValue == 'subItem') {
-                            $cantuman = 'http://opac.unila.ac.id' . $it->childNodes->item(0)->attributes->item(0)->nodeValue;
-                        }
-                    }
-                }
-
-            }
-        }
-
-        $respon->data[$no]=array($judul, $pengarang, $callNumber, $tersedia, $cantuman);//ambil yang perlu saja
-        $no+=1;
-    }
-
-    // Menambahkan link ke halaman berikut
-    $respon->nextLink=$nLink;
+//    $no = 0;
+//    $judul = '';
+//    $waktu = '';
+//    $penulis = '';
+//    $berita = '';
+//
+//    foreach($nlist as $article) {
+//
+//        foreach($article->childNodes as $articl) {
+//            foreach($articl->childNodes as $artic) {
+//                if($artic->nodeName == 'h2') {
+//                    $judul = $artic->nodeValue;
+//                    continue;
+//                }
+//                // Agar tidak muncul warning https://stackoverflow.com/questions/2385834/php-dom-get-all-attributes-of-a-node
+//                if ($artic->hasAttributes()) {
+//                    foreach($artic->attributes as $arti) {
+//
+//                        if($arti->nodeValue == 'time') {
+//                            $waktu = $artic->nodeValue;
+//                        } else if($arti->nodeValue == 'a') {
+//                            $penulis = $artic->nodeValue;
+//                        } else if($arti->nodeValue == 'entry-content') {
+//                            $berita = 'http://library.unila.ac.id/web' . $artic->childNodes->article(0)->attributes->article(0)->nodeValue;
+//                        }
+//                    }
+//                }
+//
+//            }
+//        }
+//
+//        $respon->data[$no]=array($judul, $waktu, $penulis, $berita);//ambil yang perlu saja
+//        $no+=1;
+//        
+//    }
+//
+//    // Menambahkan link ke halaman berikut
+//    $respon->nextLink=$nLink;
 
     echo json_encode($respon);
     /* JSON */
