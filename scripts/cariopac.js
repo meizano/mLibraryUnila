@@ -13,8 +13,7 @@ function fetchOPAC(kata) {
     fetch(url)
         .then((resp) => resp.json())
         .then(function (data) {
-            hasilOPAC.classList.remove("alert", "alert-warning", "alert-success");
-            
+            hasilOPAC.classList.remove("alert", "alert-warning", "alert-success"); 
             hasilOPAC.innerHTML = `
             Hasil: ${data['info']}
             <br/>

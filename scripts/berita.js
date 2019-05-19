@@ -5,7 +5,7 @@ fetchberita();
 
 // Mengambil data JSON dari server
 function fetchberita() {
-    var url = 'http://localhost/mLIbraryUnilaUpdate/'; // URL RSS
+    var url = './dispatcher/beritajson.php?'; // URL RSS
     fetch(url)
         .then((resp) => resp.html())
         .then(function (data) {
