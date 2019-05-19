@@ -108,7 +108,7 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <section id="opac">
+    <section class="bg-primary" id="opac">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -119,7 +119,8 @@
                             <div class="input-append">
                                 <input type="hidden" name="search" value="search">
                                 <div class="input-group">
-                                    <input type="text" name="keywords" id="keyword" placeholder="Kata kunci pencarian" lang="id_ID" x-webkit-speech="x-webkit-speech" class="form-control input-lg input-xxlarge search-query">
+                                    <input type="text" name="keywords" id="keyword" placeholder="Kata kunci pencarian"
+                                        lang="id_ID" x-webkit-speech="x-webkit-speech" class="form-control input-lg input-xxlarge search-query">
                                     <div class="input-group-btn">
                                         <div class="btn btn-lg btn-success"><a href=# id="tblCariOPAC">Cari</a></div>
                                         <!--                                        <button type="submit" class="btn btn-lg btn-success">Cari</button>-->
@@ -127,31 +128,26 @@
                                 </div>
                         </fieldset>
                     </form>
-                    </div>
-
                 </div>
+
             </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <hr class="light">
-                    <div id="hasilOPAC">
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <hr class="light">
+                <div id="hasilOPAC">
                 </div>
             </div>
         </div>
+        </div>
     </section>
+    
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-    <!-- Theme JavaScript -->
-    <script src="js/creative.min.js"></script>
-    
     <!-- main logic -->
     <script src="scripts/main.js"></script>
 
