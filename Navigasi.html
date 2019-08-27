@@ -48,6 +48,9 @@
 
     <!-- Plugin CSS -->
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    
+    <!-- Navigasi CSS -->
+    <link href="css/navigasi.css" rel="stylesheet">
 
     <!-- Theme CSS -->
     <link href="css/creative.css" rel="stylesheet">
@@ -99,7 +102,7 @@
                     <li>
                         <a class="page-scroll" href="Navigasi.html" id="tbNavigasi">Navigasi</a>
                     </li>
-                    <li>
+                   <li>
                         <a class="page-scroll" href="peta.html" id="tblPeta">peta</a>
                     </li>
                 </ul>
@@ -109,56 +112,92 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <section class="bg-dark" id="peta">
+    <section id="Navigasi">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Lokasi UPT Perpustakaan Unila</h2>
-                    <hr class="primary">
-                    <div id="map"></div>
-                </div>
-                <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-phone fa-3x sr-contact"></i>
-                    <!-- a href="tel: memungkinkan menekan nomor untuk langsung ditelepon -->
-                    <p><a href="tel:0721-701609">(0721) 701609</a>, <a href="tel:0721-7021609">(0721) 7021609</a>, PABX
-                        808</p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                    <p><a href="mailto:library@kpa.unila.ac.id">library@kpa.unila.ac.id</a></p>
-                </div>
+            <div class="title">
+                <h2>Navigasi Lokasi Perpustakaan</h2>
+            </div>
+            <div class="borangInputTujuan">
+                <form id="survey-form" action="ar-library-navigation.html" method="GET">
+                    <div class="input-field" id="field-tujuan">
+                        <input type="text" id="tujuan" name="tujuan" placeholder="Masukkan kode tujuan" required
+                            autofocus />
+                    </div>
+                    <div class="input-field" id="field-submit">
+                        <input type="submit" id="submit" name="submit" value="Navigasi" />
+                    </div>
+                </form>
+            </div>
+            <div class="daftarLokasi" id="daftarLokasi">
+                <ol>
+                    <li>Lantai 1
+                        <ul>
+                            <li>PMP: Pintu Masuk Perpustakaan | MARKER 1</li>
+                            <li>RBC1: Ruang Baca Satu (Ruang Layanan Sirkulasi) | MARKER 2</li>
+                            <li>RK1A: Rak Koleksi A Ruang Baca 1 | MARKER 3</li>
+                            <li>RK1B: Rak Koleksi B Ruang Baca 1 | MARKER 4</li>
+                            <li>RK1C: Rak Koleksi C Ruang Baca 1 | MARKER 5</li>
+                            <li>RKKI: Ruang Layanan Koleksi Karya Ilmiah | MARKER 6</li>
+                            <li>RPK: Ruang Pengelolaan</li>
+                            <li>RPA: Ruang Pengadaan</li>
+                            <li>RPO: Ruang Pengolahan</li>
+                            <li>RPR: Ruang Perawatan</li>
+                            <li>TG1BL: Tangga 1 Barat Laut (Sebelah Depan Kiri) | MARKER 7</li>
+                            <li>TG1TL: Tangga 1 Timur Laut (Sebelah Belakang Kiri) | MARKER 8</li>
+                            <li>TG1TG: Tangga 1 Tenggara (Sebelah Belakang Kanan (menuju Mushola)) | MARKER 9</li>
+                            <li>TG1BD: Tangga 1 Barat Daya (Sebelah Depan Kanan) | MARKER 10</li>
+                            <li>TD1BD: Tangga Dalam 1 Barat Daya (Bagian Dalam Ruang Baca 1) | MARKER 11</li>
+                        </ul>
+                    </li>
+                    <li>Lantai 2
+                        <ul>
+                            <li>RLR: Ruang Layanan Referensi</li>
+                            <li>RMJ: Majalah dan Jurnal </li>
+                            <li>RKC2: Ruang Layanan Koleksi Cadangan lantai 2 | MARKER 12</li>
+                            <li>RC2A: Rak Koleksi A Ruang Koleksi Cadangan 2 | MARKER 13</li>
+                            <li>RC2B: Rak Koleksi B Ruang Koleksi Cadangan 2 | MARKER 14</li>
+                            <li>RC2C: Rak Koleksi C Ruang Koleksi Cadangan 2 | MARKER 15</li>
+                            <li>RKP: Ruang Kepala Perpustakaan</li>
+                            <li>RBC2: Ruang Baca Dua | MARKER 16</li>
+                            <li>RK2A: Rak Koleksi A Ruang Baca 2 | MARKER 17</li>
+                            <li>RK2B: Rak Koleksi B Ruang Baca 2 | MARKER 18</li>
+                            <li>RK2C: Rak Koleksi C Ruang Baca 2 | MARKER 19</li>
+                            <li>TG2BL: Tangga 2 Barat Laut (Sebelah Depan Kiri) | MARKER 20</li>
+                            <li>TG2TL: Tangga 2 Timur Laut (Sebelah Belakang Kiri) | MARKER 21</li>
+                            <li>TG2TG: Tangga 2 Tenggara (Sebelah Belakang Kanan (menuju Mushola)) | MARKER 22</li>
+                            <li>TG2BD: Tangga 2 Barat Daya (Sebelah Depan Kanan) | MARKER 23</li>
+                            <li>TD2BD: Tangga Dalam 2 Barat Daya (Bagian Dalam Ruang Baca 1) | MARKER 24</li>
+                        </ul>
+                    </li>
+                    <li>Lantai 3
+                        <ul>
+                            <li>RTI: Ruang Pengelola Teknologi Informasi Perpustakaan</li>
+                            <li>RTE: Ruang Teater</li>
+                            <li>RSM: Ruang Seminar</li>
+                            <li>RRP: Ruang Rapat</li>
+                            <li>RMS: Ruang Musola</li>
+                            <li>RBC3: Ruang Baca Tiga | MARKER 25</li>
+                            <li>RK3A: Rak Koleksi A Ruang Baca 3 | MARKER 26</li>
+                            <li>RK3B: Rak Koleksi B Ruang Baca 3 | MARKER 27</li>
+                            <li>RK3C: Rak Koleksi C Ruang Baca 3 | MARKER 28</li>
+                            <li>TG3BL: Tangga 3 Barat Laut (Sebelah Depan Kiri) | MARKER 29</li>
+                            <li>TG3TL: Tangga 3 Timur Laut (Sebelah Belakang Kiri) | MARKER 30</li>
+                            <li>TG3TG: Tangga 3 Tenggara (Sebelah Belakang Kanan (menuju Mushola)) | MARKER 31</li>
+                            <li>TG3BD: Tangga 3 Barat Daya (Sebelah Depan Kanan) | MARKER 32</li>
+                            <li>TD3BD: Tangga Dalam 3 Barat Daya (Bagian Dalam Ruang Baca 1) | MARKER 33</li>
+                        </ul>
+                    </li>
+                </ol>
             </div>
         </div>
     </section>
-
-
-    <!-- Google Maps -->
-    <script>
-        function initMap() {
-            var libUnila = {
-                lat: -5.3618484,
-                lng: 105.2403799
-            };
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 13,
-                center: libUnila
-            });
-
-            var marker = new google.maps.Marker({
-                position: libUnila,
-                map: map,
-                icon: 'https://maps.google.com/mapfiles/kml/pal3/icon21.png'
-            });
-        }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB271c4Q2R9wxZq7-nprsTtzezpful8mwI&callback=initMap"></script>
-
-     <!-- jQuery -->
+    
+    <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
+    
     <!-- main logic -->
     <script src="scripts/main.js"></script>
 

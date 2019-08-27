@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
-
+<?php
+$kdb =koneksidatabase(); ?>
 <head>
 
     <meta charset="utf-8">
@@ -51,6 +52,9 @@
 
     <!-- Theme CSS -->
     <link href="css/creative.css" rel="stylesheet">
+
+    <!-- Login CSS -->
+    <link href="css/login.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -108,60 +112,46 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+   
+    <section id="login">
+       <div class="container">
+        <div class="kotak_login">
+            <p class="tulisan_login">Silahkan login</p>
 
-    <section class="bg-dark" id="peta">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Lokasi UPT Perpustakaan Unila</h2>
-                    <hr class="primary">
-                    <div id="map"></div>
-                </div>
-                <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-phone fa-3x sr-contact"></i>
-                    <!-- a href="tel: memungkinkan menekan nomor untuk langsung ditelepon -->
-                    <p><a href="tel:0721-701609">(0721) 701609</a>, <a href="tel:0721-7021609">(0721) 7021609</a>, PABX
-                        808</p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                    <p><a href="mailto:library@kpa.unila.ac.id">library@kpa.unila.ac.id</a></p>
-                </div>
-            </div>
+            <form action="cek_login.php" method="post">
+                <label>NPM</label>
+                <input type="text" name="member_id" class="form_login" placeholder="Username .." required="required">
+                <input type="submit" class="tombol_login" value="LOGIN">
+                <br />
+                <center>
+                    <a class="link" href="index.html">kembali</a>
+                </center>
+            </form>
+
+        </div>
         </div>
     </section>
+    
 
-
-    <!-- Google Maps -->
-    <script>
-        function initMap() {
-            var libUnila = {
-                lat: -5.3618484,
-                lng: 105.2403799
-            };
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 13,
-                center: libUnila
-            });
-
-            var marker = new google.maps.Marker({
-                position: libUnila,
-                map: map,
-                icon: 'https://maps.google.com/mapfiles/kml/pal3/icon21.png'
-            });
-        }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB271c4Q2R9wxZq7-nprsTtzezpful8mwI&callback=initMap"></script>
-
-     <!-- jQuery -->
+    <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
+    
     <!-- main logic -->
     <script src="scripts/main.js"></script>
 
 </body>
 
 </html>
+<?php
+function koneksidatabase()
+{
+include ('admin/koneksi/koneksi.php');
+return $kdb;
+
+
+}
+
+ ?>
