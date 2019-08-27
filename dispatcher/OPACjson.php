@@ -6,8 +6,8 @@ if($_GET){
 
     ## BAGIAN 1 MENGOLAH HTML MENJADI OBYEK PHP ##
     # Mengambil HTML
-      $url = "http://opac.unila.ac.id/index.php?search=search&keywords=" . $keywords;
-//    $url = "http://localhost/mLibraryUnilaUpdate/dispatcher/OPACjamur.html";
+     $url = "http://opac.unila.ac.id/index.php?search=search&keywords=" . $keywords;
+//    $url = "http://localhost/git/mLibraryUnila/dispatcher/OPACjamur.html";
 
     # Use the Curl extension to query and get back a page of results
     $ch = curl_init();
