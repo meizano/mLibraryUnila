@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Path Finding 3D</title>
+
+</head>
+
+<body>
+    <div id="asal"></div>
+    <div id="tujuan"></div>
+    <div id="jalur"></div>
+
+    <script type="text/javascript" src="./lib/pathfinding-browser.js"></script>
+    <script type="text/javascript" src="./js/navigasi.js"></script>
+    <script async>
+        var asal = document.querySelector("#asal");
+        var tujuan = document.querySelector("#tujuan");
+        var jalur = document.querySelector("#jalur");
+
+        var nodes = create3DLayout(26, 26, 3);
+
+        createWalkablePath(nodes, nodes[7][14][0], nodes[9][17][0]);
+        createWalkablePath(nodes, nodes[0][0][0], nodes[25][25][2]);
+        createWalkablePath(nodes, nodes[0][25][0], nodes[9][17][0]);
+        createWalkablePath(nodes, nodes[1][15][1], nodes[9][17][0]);
+        createWalkablePath(nodes, nodes[20][25][1], nodes[9][17][0]);
+
+        // Membuat finder
+        var finder = new PF.AStarFinder();
+
+        // Titik awal | Coba diganti dengan node yang ada di jalur atau pun yang tidak dibuat di jalur
+        var startNode = nodes[14][14][2];
+        console.log(startNode);
+        asal.innerHTML = "Asal = (" + startNode.x + ", " + startNode.y + ", " + startNode.z + ")";
+
+        // Tujuan | Coba diganti dengan node yang ada di jalur atau pun yang tidak dibuat di jalur
+        var endNode = nodes[17][17][2];
+        console.log(endNode);
+        tujuan.innerHTML = "Tujuan = (" + endNode.x + ", " + endNode.y + ", " + endNode.z + ")";
+
+        var path;
+
+        // Cari jalan
+        path = finder.findPath(startNode, endNode, nodes);
+        console.log(path);
+        jalur.innerHTML += path;
+    </script>
+
+</body>
+
+</html>
