@@ -2,8 +2,8 @@
     # dbconfig.php
 
     # konfigurasi database
-    $host = 'localhost';
+    $host = '10.10.100.6';
     $dbname = 'perpus';
-    $username = 'root';
-    $password = '';
+    $username = 'aldi';
+    $password = 'aldi2019sql';
 ?>
