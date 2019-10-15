@@ -35,10 +35,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 }, false);
+var db;
+var request = indexedDB.open("data_npm");
+request.onerror = function (event) {
+    console.log("Why didn't you allow my web app to use IndexedDB?!");
+};
+request.onsuccess = function (event) {
+    db = event.target.result;
+};
+
 function FetchAPIGET() {
     var inputID = document.querySelector("#id").value;
-                        console.log('--------------------PINJAM----------------'); 
-        console.log("About to add " + inputID);
+    console.log('--------------------PINJAM----------------');
+    console.log("About to add " + inputID);
     url = 'dispatcher/api.php/pinjam/' + inputID;
     fetch(url, {
             method: 'GET',
@@ -54,32 +63,31 @@ function FetchAPIGET() {
             console.log('------------------------------------');
             //Define a person
             var person = {
-                    member_id: inputID,
-                    //        email:email,
-                    created: new Date(),
-                    data: aldi
-                }
-            
+                member_id: inputID,
+                created: new Date(),
+                data: aldi
+            }
+
             console.log(JSON.stringify(person));
 
             var transaction = db.transaction(["npm"], "readwrite");
-                    var store = transaction.objectStore("npm");
+            var store = transaction.objectStore("npm");
 
-                    //Perform the add
-                    var request = store.add(person, 1);
+            //Perform the add
+            var request = store.add(person, 1);
 
-                    request.onerror = function (e) {
-                        console.log("Error", e.target.error.member_id);
-                        //some type of error handler
-                    }
+            request.onerror = function (e) {
+                console.log("Error", e.target.error.member_id);
+                //some type of error handler
+            }
 
-                    request.onsuccess = function (e) {
+            request.onsuccess = function (e) {
 
-                        console.log("Woot! Did it");
+                console.log("Woot! Did it");
 
-                    }
+            }
             tampilkanData(aldi);
-                                            
+
         })
         .catch(function (error) {
             console.log(JSON.stringify(error));
@@ -106,8 +114,8 @@ function tampilkanData(dataRAW) {
         thead = createNode('thead'),
         th1 = createNode('th'),
         th2 = createNode('th'),
-        th3 = createNode('th');
-    th4 = createNode('th');
+        th3 = createNode('th'),
+        th4 = createNode('th');
     // memasukkan judul
     th1.innerHTML = 'Nama';
     th2.innerHTML = 'Judul';
