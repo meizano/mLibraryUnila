@@ -1,5 +1,6 @@
 var tampilanData = document.getElementById("tampilanData");
 var db;
+var datapinjaman = [];
 
 function indexedDBOk() {
     return "indexedDB" in window;
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         db = e.target.result;
 
         //Listen for add clicks
-        document.getElementById("btnAmbilData").addEventListener("click", FetchAPIGET);
+        document.getElementById("btnAmbilData").addEventListener("click", FetchAPIGET, bacaDB);
     }
 
     openRequest.onerror = function (e) {
@@ -35,14 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 }, false);
-var db;
-var request = indexedDB.open("data_npm");
-request.onerror = function (event) {
-    console.log("Why didn't you allow my web app to use IndexedDB?!");
-};
-request.onsuccess = function (event) {
-    db = event.target.result;
-};
 
 function FetchAPIGET() {
     var inputID = document.querySelector("#id").value;
@@ -94,6 +87,47 @@ function FetchAPIGET() {
         });
 }
 
+function getObjectStore(store_name, mode) {
+    var tx = db.transaction(store_name, mode);
+    return tx.objectStore(store_name);
+}
+
+function bacaDB() {
+
+    var store = getObjectStore("npm", 'readonly');
+
+
+    req = store.openCursor();
+    req.onsuccess = function (evt) {
+        var cursor = evt.target.result;
+
+        // If the cursor is pointing at something, ask for the data
+        if (cursor) {
+            // console.log(cursor);
+            req = store.get(cursor.key);
+            req.onsuccess = function (evt) {
+                var value = evt.target.result;
+                datapinjaman.push(value);
+                console.log(value);
+                console.log(value.member_id);                
+                console.log(value["member_id"]);                
+                console.log(value.data.data[0].due_date);
+//                console.log(value.loan_date);
+//                console.log(value.member_name);
+//                console.log(value.return_date);
+//                console.log(value.title);
+            };
+
+            // Move on to the next object in store
+            cursor.continue();
+
+
+        } else {
+            console.log("No more entries");
+        }
+    };
+}
+
 //Fungsi untuk memudahkan buat Node
 function createNode(element) {
     // Membuat tipe elemen yang dilewatkan melalui parameter
@@ -115,17 +149,20 @@ function tampilkanData(dataRAW) {
         th1 = createNode('th'),
         th2 = createNode('th'),
         th3 = createNode('th'),
-        th4 = createNode('th');
+        th4 = createNode('th'),
+        th5 = createNode('th');
     // memasukkan judul
     th1.innerHTML = 'Nama';
     th2.innerHTML = 'Judul';
-    th3.innerHTML = 'Tangal Peminjaman';
-    th4.innerHTML = 'Tangal Pengembalian';
+    th3.innerHTML = 'Tanggal Peminjaman';
+    th4.innerHTML = 'Batas Waktu';
+    th5.innerHTML = 'Tanggal Pengembalian';
     // memakai fungsi append ke parameter pertama
     append(thead, th1);
     append(thead, th2);
     append(thead, th3);
     append(thead, th4);
+    append(thead, th5);
     append(table, thead);
 
     for (i = 0; i < dataRAW.data.length; i++) {
@@ -133,17 +170,20 @@ function tampilkanData(dataRAW) {
             td1 = createNode('td'),
             td2 = createNode('td'),
             td3 = createNode('td'),
-            td4 = createNode('td');
+            td4 = createNode('td'),
+            td5 = createNode('td');
         // memasukkan data ke dalam data tabel
         td1.innerHTML = dataRAW.data[i].member_name;
         td2.innerHTML = dataRAW.data[i].title;
         td3.innerHTML = dataRAW.data[i].loan_date;
-        td4.innerHTML = dataRAW.data[i].return_date;
+        td4.innerHTML = dataRAW.data[i].due_date;
+        td5.innerHTML = dataRAW.data[i].return_date;
         // memakai fungsi append ke parameter pertama
         append(tr, td1);
         append(tr, td2);
         append(tr, td3);
         append(tr, td4);
+        append(tr, td5);
         append(table, tr);
     }
     append(tampilanData, table);
