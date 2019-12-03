@@ -1,35 +1,35 @@
 {
     "name": "Unila Library Mobile",
-    "short_name": "UnilaLibrary",
+    "short_name": "mLibrary",
     "description": "Layanan akses mobile UPT Perpustakaan Universitas Lampung.",
     "lang": "id-ID",
     "start_url": "./",
     "display": "standalone",
-    "theme_color": "#ffab1f",
-    "background_color": "#ffab1f",
+    "theme_color": "#00BFFF",
+    "background_color": "#00BFFF",
     "icons": [
         {
-            "src": "./img/icons/apple-icon-72x72.png",
-            "sizes": "72x72"
+            "src": "./img/icons/Logo-Perpustakaan-272x99.png",
+            "sizes": "272x99"
     },
         {
-            "src": "./img/icons/apple-icon-120x120.png",
-            "sizes": "120x120"
+            "src": "./img/icons/Logo-Perpustakaan-320x116.png",
+            "sizes": "320x116"
     },
         {
-            "src": "./img/icons/apple-icon-144x144.png",
-            "sizes": "144x144"
+            "src": "./img/icons/Logo-Perpustakaan-344x125.png",
+            "sizes": "344x125"
     },
         {
-            "src": "./img/icons/apple-icon-152x152.png",
-            "sizes": "152x152"
+            "src": "./img/icons/Logo-Perpustakaan-352x128.png",
+            "sizes": "352x128"
     },
         {
-            "src": "./img/icons/apple-icon-180x180.png",
-            "sizes": "180x180"
+            "src": "./img/icons/Logo-Perpustakaan-371x135.png",
+            "sizes": "371x135"
     },
         {
-            "src": "./img/icons/apple-icon.png"
+            "src": "./img/icons/Logo-Perpustakaan-391x142.png"
     }
   ]
 }
