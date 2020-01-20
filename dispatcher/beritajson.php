@@ -3,8 +3,8 @@
 
     ## BAGIAN 1 MENGOLAH HTML MENJADI OBYEK PHP ##
     # Mengambil HTML
-     $url = "http://library.unila.ac.id/web/";
-//    $url = "http://localhost/git/mLibraryUnila/dispatcher/weblibunila.html";
+     $url = "https://library.unila.ac.id/web/";
+//    $url = "http://localhost/mLibraryUnilaUpdate/dispatcher/weblibunila.html";
 
     # Use the Curl extension to query and get back a page of results
     $ch = curl_init();
