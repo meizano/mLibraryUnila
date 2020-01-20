@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!indexedDBOk) return;
 
     var openRequest = indexedDB.open("data_npm", 1);
-
+    
     openRequest.onupgradeneeded = function (e) {
         var thisDB = e.target.result;
 
@@ -88,8 +88,8 @@ function FetchAPIGET() {
 }
 
 function getObjectStore(store_name, mode) {
-    var tx = db.transaction(store_name, mode);
-    return tx.objectStore(store_name);
+    var store = db.transaction(store_name, mode);
+    return store.objectStore(store_name);
 }
 
 function bacaDB() {
@@ -111,7 +111,7 @@ function bacaDB() {
                 console.log(value);
                 console.log(value.member_id);                
                 console.log(value["member_id"]);                
-                console.log(value.data.data[0].due_date);
+                console.log(value.data.data[0].return_date);
 //                console.log(value.loan_date);
 //                console.log(value.member_name);
 //                console.log(value.return_date);
@@ -188,4 +188,4 @@ function tampilkanData(dataRAW) {
     }
     append(tampilanData, table);
 }
-//document.getElementById("btnAmbilData").addEventListener("click", FetchAPIGET);
+//document.getElementById("btnAmbilData").addEventListener("click", FetchAPIGET); 
