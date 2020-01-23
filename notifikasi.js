@@ -53,7 +53,7 @@ Date.tenggatWaktu = function (hrPengembalian) {
 // Proses olah per buku
 // Iterasi seluruh item pada indexedDB
 // Akses tanggal pengembalian setiap buku
-bacaDB()
+bacaDB():
 let hariPengembalian = new Date(datapinjaman.data[0].return_date);
 let tenggatPengembalian = Date.tenggatWaktu(hariPengembalian);
 
