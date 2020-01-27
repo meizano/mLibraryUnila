@@ -53,6 +53,7 @@ Date.tenggatWaktu = function (hrPengembalian) {
 // Proses olah per buku
 // Iterasi seluruh item pada indexedDB
 // Akses tanggal pengembalian setiap buku
+function notifikasi(){
 bacaDB():
 let hariPengembalian = new Date(datapinjaman.data[0].return_date);
 let tenggatPengembalian = Date.tenggatWaktu(hariPengembalian);
@@ -64,4 +65,5 @@ if (tenggatPengembalian < 3) {
     else
         pesan = "Waktu Pengembalian buku " + tenggatPengembalian + " hari lagi";
     notifyPengembalian(pesan);
+}
 }
