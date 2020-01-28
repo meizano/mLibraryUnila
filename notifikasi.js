@@ -53,17 +53,53 @@ Date.tenggatWaktu = function (hrPengembalian) {
 // Proses olah per buku
 // Iterasi seluruh item pada indexedDB
 // Akses tanggal pengembalian setiap buku
-function notifikasi(){
-bacaDB():
-let hariPengembalian = new Date(datapinjaman.data[0].return_date);
-let tenggatPengembalian = Date.tenggatWaktu(hariPengembalian);
+function notifyPesan(){
 
-if (tenggatPengembalian < 3) {
-    let pesan;
-    if (tenggatPengembalian < 0)
-        pesan = "Waktu Pengembalian buku sudah lewat " + tenggatPengembalian + " hari";
-    else
-        pesan = "Waktu Pengembalian buku " + tenggatPengembalian + " hari lagi";
-    notifyPengembalian(pesan);
+    // Menyalin nilai obyek datapinjaman[0].data.data ke pinjaman
+    let pinjaman = datapinjaman[0].data.data;
+
+    let pesan = "";
+    // Melakukan iterasi terhadap obyek pinjaman
+    for( pinjam in pinjaman) {
+        // mengambil nilai return_date
+        let hariTerakhirPengembalian = pinjaman[pinjam].return_date;
+
+        // Jika belum dikembalikan ~ nilai return_date null, berikan notifikasi
+        // komen baris di bawah ini untuk menguji notifikasi
+        if(hariTerakhirPengembalian == null) {
+            
+            let hariPengembalian = new Date(pinjaman[pinjam].due_date);
+
+            let tenggatPengembalian = Date.tenggatWaktu(hariPengembalian);
+
+            // mengambil nilai title
+            let judulPustaka = pinjaman[pinjam].title;
+        
+            // Jika pengembalian menjelang 3 hari atau kurang
+            if (tenggatPengembalian < 3) {
+                
+                // Jika pengembalian sudah lewat hari
+                if (tenggatPengembalian < 0)
+                    pesan += judulPustaka + " sudah lewat " + tenggatPengembalian + " hari; ";
+                else
+                    pesan += judulPustaka + " " + tenggatPengembalian + " hari lagi; ";
+   
+            }
+        // komen baris di bawah ini untuk menguji notifikasi
+        }
+    }
+
+    // Jika ada buku yang harus dikembalikan menjelang 3 hari atau kurang, lakukan notifikasi
+    if(pesan != "")
+        notifyPengembalian("Pengembalian: " + pesan);
 }
+
+function notifikasi() {
+    // Membaca data dari IndexedDB dan meletakkan nilainya pada obyek datapinjaman setelah 1 detik
+    window.setTimeout(bacaDB, 1*1000);
+
+    // Menjalankan notifikasi setelah 2 detik
+    window.setTimeout(notifyPesan, 2*1000);
 }
+
+notifikasi();
