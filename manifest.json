@@ -1,6 +1,6 @@
 {
     "name": "Unila Library Mobile",
-    "short_name": "mLibrary",
+    "short_name": "UnilaLibrary",
     "description": "Layanan akses mobile UPT Perpustakaan Universitas Lampung.",
     "lang": "id-ID",
     "start_url": "./",
@@ -9,23 +9,27 @@
     "background_color": "#00BFFF",
     "icons": [
         {
-            "src": "./img/icons/Logo-Perpustakaan-96.png",
-            "sizes": "96x35"
+            "src": "./img/icons/Logo-Perpustakaan-232x85.png",
+            "sizes": "232x85"
     },
         {
-            "src": "./img/icons/Logo-Perpustakaan-144.png",
-            "sizes": "144x52"
+            "src": "./img/icons/Logo-Perpustakaan-276x100.png",
+            "sizes": "276x100"
     },
         {
-            "src": "./img/icons/Logo-Perpustakaan-256.png",
-            "sizes": "256x93"
+            "src": "./img/icons/Logo-Perpustakaan-320x116.png",
+            "sizes": "320x116"
     },
         {
-            "src": "./img/icons/Logo-Perpustakaan-512.png",
-            "sizes": "512x186"
-    },        
-        {
-            "src": "./img/icons/Logo-Perpustakaan.png",
+            "src": "./img/icons/Logo-Perpustakaan-344x125.png",
+            "sizes": "344x125"
     },
+        {
+            "src": "./img/icons/Logo-Perpustakaan-391x142.png",
+            "sizes": "391x142"
+    },
+        {
+            "src": "./img/icons/Logo-Perpustakaan.png"
+    }
   ]
 }
