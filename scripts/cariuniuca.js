@@ -26,7 +26,7 @@ function fetchUniUca(kata) {
                 <a target="_blank" href="${data['data'][i][4]}" >${data['data'][i][0]}</a>
                 <span>${data['data'][i][1]}</span>
                 <span>${data['data'][i][2]}</span>
-                <span>${data['data'][i][3]}</span>
+                <span>${data['data'][i][3]}</span><br/>
                 <br/>
                 `;
             }
