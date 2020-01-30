@@ -10,7 +10,7 @@ body {
     display: flex;
     /* height:100vh; memakai seluruh tinggi yang tampil di layar */
     flex-direction:column; /* Agar flex-grow dapat memakai seluruh ruang tersisa */
-    background-color: #fff;
+    background-color: white;
 }
 
 @media only screen and (min-width: 768px) {
@@ -43,7 +43,7 @@ p {
 }
 
 .logo {
-/*    background: url("../img/unila-library-logo.png") center no-repeat;*/
+    background: url("../img/unila-library-logo.png") center no-repeat;
     display: inline-block;
     height: 8em;
     width: 17em;
