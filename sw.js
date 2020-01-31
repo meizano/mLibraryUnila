@@ -1,6 +1,9 @@
-'use strict';
 importScripts('./sw-toolbox.js');
-toolbox.precache([
+self.addEventListener('install', function (e) {
+    console.log('woot!', 'install', event);
+    e.waitUntil(
+        caches.open('UnilaLibrary').then(function (cache) {
+            return cache.addAll([
     "./",
     "./index.html",
     "./ar-library-navigation.html",
@@ -14,7 +17,7 @@ toolbox.precache([
     "./UniUca.html",
     "./css/creative.css",
     "./css/navigasi.css",
-    "./css/pinjam.css",    
+    "./css/pinjam.css",
     "./dispatcher/**.*",
     "./img/icons/**.*",
     "./js/**.*",
@@ -31,7 +34,15 @@ toolbox.precache([
     "https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic",
     "./vendor/magnific-popup/magnific-popup.css"
 ]);
-toolbox.router.get('./img/*', toolbox.cacheFirst);
-toolbox.router.get('./*', toolbox.networkFirst, {
-    networkTimeoutSeconds: 5
+        })
+    );
+});
+self.addEventListener('activate', (event) => {
+  console.log('woot!', 'activate', event);
+  return self.clients.claim();
+});
+
+self.addEventListener('fetch', function(event) {
+  // console.log('woot!', 'fetch', event);
+  event.respondWith(fetch(event.request));
 });
