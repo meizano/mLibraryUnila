@@ -3,7 +3,7 @@
     "short_name": "UnilaLibrary",
     "description": "Layanan akses mobile UPT Perpustakaan Universitas Lampung.",
     "lang": "id-ID",
-    "start_url": "/?source=pwa",
+    "start_url": "https://library.unila.ac.id/pwa/?utm_source=homescreen&utm_medium=shortcut",
     "display": "standalone",
     "theme_color": "#00BFFF",
     "background_color": "#00BFFF",
