@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!indexedDBOk) return;
 
     var openRequest = indexedDB.open("data_npm", 1);
-    
+
     openRequest.onupgradeneeded = function (e) {
         var thisDB = e.target.result;
 
@@ -66,6 +66,20 @@ function FetchAPIGET() {
             var transaction = db.transaction(["npm"], "readwrite");
             var store = transaction.objectStore("npm");
 
+            //Perform the delete
+            var request = store.delete(0);
+        
+            request.onerror = function (e) {
+                console.log("Error", e.target.error.member_id);
+                //some type of error handler
+            }
+
+            request.onsuccess = function (e) {
+
+                console.log("Berhasil menghapus");
+
+            }
+
             //Perform the add
             var request = store.add(person, 1);
 
@@ -76,7 +90,7 @@ function FetchAPIGET() {
 
             request.onsuccess = function (e) {
 
-                console.log("Woot! Did it");
+                console.log("Berhasil menambahkan");
 
             }
             tampilkanData(aldi);
@@ -109,13 +123,13 @@ function bacaDB() {
                 var value = evt.target.result;
                 datapinjaman.push(value);
                 console.log(value);
-                console.log(value.member_id);                
-                console.log(value["member_id"]);                
+                console.log(value.member_id);
+                console.log(value["member_id"]);
                 console.log(value.data.data[0].return_date);
-//                console.log(value.loan_date);
-//                console.log(value.member_name);
-//                console.log(value.return_date);
-//                console.log(value.title);
+                //                console.log(value.loan_date);
+                //                console.log(value.member_name);
+                //                console.log(value.return_date);
+                //                console.log(value.title);
             };
 
             // Move on to the next object in store
