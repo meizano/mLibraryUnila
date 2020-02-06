@@ -18,12 +18,12 @@ function fetchberita() {
                 console.log(data[i].title.rendered); //console.log
                 console.log(data[i].author);
                 console.log(data[i].modified);
-                console.log(data[i].content.rendered);
+                console.log(data[i].excerpt.rendered);
                 hasilberita.innerHTML += `
                  <h2 align="center"> <a target="_blank" href="${data[i].link}" >${data[i].title.rendered}</a></h2>
                  <p align="center">${data[i].author}  
                  ${data[i].modified}</p>
-                 <p align="justify">${data[i].content.rendered}</p>
+                 <p align="justify">${data[i].excerpt.rendered}</p>
                  <br/>
                  `;
             }
